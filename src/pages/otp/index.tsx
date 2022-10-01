@@ -43,6 +43,7 @@ const OTP: NextPage = () => {
     [router]
   );
 
+  /** OTP Credential API処理 */
   useEffect(() => {
     // OTP Credential APIが使用可能かどうか
     if (!("OTPCredential" in window)) {
@@ -60,6 +61,7 @@ const OTP: NextPage = () => {
     const abort = (): void => ac.abort();
 
     if (form != null) {
+      // ユーザー操作で送信したらabort
       form.addEventListener("submit", abort);
     }
 
@@ -71,10 +73,12 @@ const OTP: NextPage = () => {
         signal: ac.signal,
       })
       .then(async (otp) => {
+        // MEMO: hook formを使ってsetValue/trigger
         // @ts-expect-error
         setValue("otp", otp?.code ?? "");
         await trigger("otp");
 
+        // バリデーションを満たしている
         if (isValid) {
           submitOTP({ otp: getValues("otp") });
         }
@@ -84,6 +88,7 @@ const OTP: NextPage = () => {
         console.log(error);
       });
 
+    // クリーンアップ処理でlistenerをremove
     return () => {
       if (form != null) {
         form?.removeEventListener("submit", abort);
