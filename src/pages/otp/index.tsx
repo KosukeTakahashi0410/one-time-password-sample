@@ -1,7 +1,7 @@
 import type { NextPage } from "next";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { phoneNumberScheme } from "@/validation/formSchemes";
+import { otpFormScheme } from "@/validation/formSchemes";
 
 interface PhoneInput {
   phoneNumber: string;
@@ -13,7 +13,7 @@ const OTP: NextPage = () => {
     formState: { isValid, isSubmitting, errors },
   } = useForm<PhoneInput>({
     mode: "onBlur",
-    resolver: yupResolver(phoneNumberScheme),
+    resolver: yupResolver(otpFormScheme),
   });
 
   return (
