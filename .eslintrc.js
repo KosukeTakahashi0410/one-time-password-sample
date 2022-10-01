@@ -15,6 +15,8 @@ module.exports = {
     // MEMO: eslint-plugin-reactと競合するのでOFF
     "react/jsx-uses-react": "off",
     "react/react-in-jsx-scope": "off",
+    // MEMO: https://github.com/react-hook-form/react-hook-form/discussions/8020
+    "@typescript-eslint/no-misused-promises": "off",
   },
   settings: {
     react: {
