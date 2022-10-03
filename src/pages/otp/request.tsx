@@ -45,11 +45,14 @@ const OTPRequest: NextPage = () => {
         <section>
           <form onSubmit={handleSubmit(submitPhone)}>
             <div className="flex-col  justify-center">
-              <label className="form-label inline-block mb-2 text-gray-700">携帯電話番号</label>
+              <label className="form-label inline-block mb-2 text-gray-700">
+                携帯電話番号
+              </label>
               <input
                 {...register("phoneNumber")}
                 placeholder="半角英数字で入力してください"
-                className="form-control
+                className="
+                  form-control
                   block
                   w-full
                   px-3
@@ -65,8 +68,10 @@ const OTPRequest: NextPage = () => {
                   m-0
                   focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
               />
-              <p>例）08000000000</p>
-              {errors.phoneNumber != null && <p>{errors.phoneNumber.message}</p>}
+              <p className="mb-2 text-sm">例）08000000000</p>
+              {errors.phoneNumber != null && (
+                <p>{errors.phoneNumber.message}</p>
+              )}
             </div>
             <button disabled={!isValid || isSubmitting}>SNSを送信</button>
           </form>
