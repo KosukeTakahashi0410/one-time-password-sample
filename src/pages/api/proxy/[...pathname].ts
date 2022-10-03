@@ -8,6 +8,7 @@ export const config = {
   api: {
     bodyParser: false,
     externalResolver: true,
+    responseLimit: false,
   },
 };
 
@@ -17,11 +18,9 @@ const handler: NextApiHandler = async (
 ) => {
   await httpProxyMiddleware(req, res, {
     // FIXME: 今はポケモンAPI
-    target: `https://pokeapi.co`,
+    target: `https://api.exchangeratesapi.io/`,
     changeOrigin: true,
-    pathRewrite: {
-      "^/proxy": "/v2",
-    },
+    pathRewrite: [{ patternStr: "^/api/proxy", replaceStr: "" }],
   });
 };
 

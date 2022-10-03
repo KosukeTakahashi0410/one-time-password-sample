@@ -4,7 +4,7 @@ import axios from "@/lib/axios";
 const Home: NextPage = () => {
   const axiosTest = async (): Promise<void> => {
     try {
-      const response = await axios.get("/api/proxy/ditto");
+      const response = await axios.get("/api/proxy/latest?base=JPY");
       window.alert(response);
     } catch (error) {
       console.log(error);
