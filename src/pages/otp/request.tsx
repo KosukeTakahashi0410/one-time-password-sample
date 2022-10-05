@@ -16,7 +16,7 @@ const OTPRequest: NextPage = () => {
     handleSubmit,
     formState: { isValid, isSubmitting, errors },
   } = useForm<PhoneInput>({
-    mode: "onBlur",
+    mode: "onChange",
     resolver: yupResolver(phoneNumberFormScheme),
   });
 
@@ -39,21 +39,22 @@ const OTPRequest: NextPage = () => {
   };
 
   return (
-    <div className="flex-col justify-center mt-8 pl-4 pr-4">
+    <div className="mt-8 pl-4 pr-4">
       <div className="max-w-screen-md mx-auto">
-        <h1>2段階認証を行う</h1>
+        <h1 className="text-lg font-bold">2段階認証を行う</h1>
         <section>
-          <form onSubmit={handleSubmit(submitPhone)}>
-            <div className="flex-col  justify-center">
-              <label className="form-label inline-block mb-2 text-gray-700">
-                携帯電話番号
-              </label>
-              <input
-                {...register("phoneNumber")}
-                placeholder="半角英数字で入力してください"
-                className="
+          <form
+            onSubmit={handleSubmit(submitPhone)}
+            className="flex mt-2 flex-col justify-center"
+          >
+            <label className="form-label mt-2 text-gray-700">
+              携帯電話番号
+            </label>
+            <input
+              {...register("phoneNumber")}
+              placeholder="半角英数字で入力してください"
+              className="
                   form-control
-                  block
                   w-full
                   px-3
                   py-1.5
@@ -65,15 +66,21 @@ const OTPRequest: NextPage = () => {
                   rounded
                   transition
                   ease-in-out
-                  m-0
+                  mt-2
                   focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-              />
-              <p className="mb-2 text-sm">例）08000000000</p>
-              {errors.phoneNumber != null && (
-                <p>{errors.phoneNumber.message}</p>
-              )}
-            </div>
-            <button disabled={!isValid || isSubmitting}>SNSを送信</button>
+            />
+            <p className="mt-2 text-sm">例）08000000000</p>
+            {errors.phoneNumber != null && (
+              <p className="mt-2 text-red-600" role="alert">
+                {errors.phoneNumber.message}
+              </p>
+            )}
+            <button
+              disabled={!isValid || isSubmitting}
+              className="mt-2 bg-gray-600 hover:bg-gray-500 disabled:bg-gray-500 text-white rounded px-4 py-2"
+            >
+              SNSを送信
+            </button>
           </form>
         </section>
       </div>
