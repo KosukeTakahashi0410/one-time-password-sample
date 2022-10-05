@@ -39,7 +39,7 @@ const OTPRequest: NextPage = () => {
   };
 
   return (
-    <div className="flex-col justify-center max-w-full my-6">
+    <div className="flex-col justify-center mt-8 pl-4 pr-4">
       <div className="max-w-screen-md mx-auto">
         <h1>2段階認証を行う</h1>
         <section>
