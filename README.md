@@ -1,6 +1,8 @@
 # WEB OTP Credential API Sample
 
-このプロジェクトは WEB OTP Credential API のサンプルのためのプロジェクトです。
+このプロジェクトは WEB OTP Credential API のサンプルのためのプロジェクトです。  
+Vercel でホスティングされています。
+[開発環境](https://one-time-password-sample.vercel.app/otp/request)
 
 ## 環境構築
 
