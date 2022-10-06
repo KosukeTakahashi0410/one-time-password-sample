@@ -22,5 +22,5 @@ export const otpFormScheme = yup.object().shape({
     .matches(numberRegex, {
       message: "半角英数字のみが入力できます",
     })
-    .max(6, { message: "6桁以下で入力してください" }),
+    .length(6, "6桁で入力してください"),
 });
