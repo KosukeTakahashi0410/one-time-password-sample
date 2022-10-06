@@ -97,25 +97,51 @@ const OTP: NextPage = () => {
   }, [getValues, isValid, setValue, submitOTP, trigger]);
 
   return (
-    <div>
-      <h1>ワンタイムパスワードを入力する</h1>
-      <section>
-        <form>
-          <div>
-            <label onSubmit={handleSubmit(submitOTP)}>携帯電話番号</label>
+    <div className="mt-8 pl-4 pr-4">
+      <div className="max-w-screen-md mx-auto">
+        <h1 className="text-lg font-bold">ワンタイムパスワードを入力する</h1>
+        <section>
+          <form
+            onSubmit={handleSubmit(submitOTP)}
+            className="flex mt-2 flex-col justify-center"
+          >
+            <label className="form-label mt-2 text-gray-700">
+              ワンタイムパスワード
+            </label>
             <input
               {...register("otp")}
               placeholder="半角英数字で入力してください"
               autoComplete="one-time-code"
+              className="
+                  form-control
+                  w-full
+                  px-3
+                  py-1.5
+                  text-base
+                  font-normal
+                  text-gray-700
+                  bg-white bg-clip-padding
+                  border border-solid border-gray-300
+                  rounded
+                  transition
+                  ease-in-out
+                  mt-2
+                  focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
             />
-            <p>例）08000000000</p>
-            {errors.otp != null && <p>{errors.otp.message}</p>}
-          </div>
-          <button type="submit" disabled={!isValid || isSubmitting}>
-            送信
-          </button>
-        </form>
-      </section>
+            {errors.otp != null && (
+              <p className="mt-2 text-red-600" role="alert">
+                {errors.otp.message}
+              </p>
+            )}
+            <button
+              disabled={!isValid || isSubmitting}
+              className="mt-2 bg-gray-600 hover:bg-gray-500 disabled:bg-gray-500 text-white rounded px-4 py-2"
+            >
+              送信
+            </button>
+          </form>
+        </section>
+      </div>
     </div>
   );
 };
