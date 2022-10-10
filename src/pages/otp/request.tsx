@@ -3,19 +3,23 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { phoneNumberFormScheme } from "@/validation/formSchemes";
 import { useRouter } from "next/router";
+import { supabase } from "@/lib/supabaseClient";
 import { pagesPath } from "@/lib/$path";
 
-interface PhoneInput {
+
+interface ISignupInput {
   phoneNumber: string;
+  password: string
 }
 
 const OTPRequest: NextPage = () => {
   const router = useRouter();
+
   const {
     register,
     handleSubmit,
     formState: { isValid, isSubmitting, errors },
-  } = useForm<PhoneInput>({
+  } = useForm<ISignupInput>({
     mode: "onChange",
     resolver: yupResolver(phoneNumberFormScheme),
   });
