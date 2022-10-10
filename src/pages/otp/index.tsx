@@ -20,7 +20,7 @@ const OTP: NextPage = () => {
     trigger,
     formState: { isValid, isSubmitting, errors },
   } = useForm<OTPInput>({
-    mode: "onBlur",
+    mode: "onChange",
     resolver: yupResolver(otpFormScheme),
   });
 
@@ -35,7 +35,7 @@ const OTP: NextPage = () => {
         console.log(otp);
 
         // 入力画面に遷移
-        await router.replace(pagesPath.otp.$url());
+        await router.replace(pagesPath.otp.complete.$url());
       } catch (error) {
         // TODO ここでtoastとか出すか
       }
