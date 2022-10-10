@@ -34,8 +34,7 @@ const OTPRequest: NextPage = () => {
   }): Promise<void> => {
     try {
       const phone = `+81${parseInt(phoneNumber, 10)}`;
-      const {error} = await supabase.auth.signUp({phone, password})
-      console.log(error)
+      await supabase.auth.signUp({phone, password})
 
       // 入力画面に遷移
       await router.push(pagesPath.otp.$url());
