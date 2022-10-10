@@ -33,15 +33,10 @@ const OTPRequest: NextPage = () => {
     password
   }): Promise<void> => {
     try {
-      console.log(phoneNumber, password);
       const phone = `+81${parseInt(phoneNumber, 10)}`;
       const {error} = await supabase.auth.signUp({phone, password})
       console.log(error)
-      if (error !== null ){
-        // TODO:エラー回避確認
-        // eslint-disable-next-line @typescript-eslint/no-throw-literal
-        throw error;
-      }
+
       // 入力画面に遷移
       await router.push(pagesPath.otp.$url());
     } catch (error: unknown) {
