@@ -43,3 +43,9 @@ $ lint:fix
 
 pathpida を使っているので、URL は `src/lib/$path` からパスを使うようにしてください。  
 パスは開発サーバーを立ち上げると自動で生成されます。
+
+## Vercel の環境変数について
+
+Vercel については @KosukeTakahashi0410 が管理しています  
+こちらは Hobby プランだと Team が追加されないためです。  
+環境変数を追加する場合は @KosukeTakahashi0410 に連絡ください。

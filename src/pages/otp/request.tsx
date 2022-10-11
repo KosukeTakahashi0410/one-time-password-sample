@@ -1,40 +1,48 @@
 import type { NextPage } from "next";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { phoneNumberFormScheme } from "@/validation/formSchemes";
+import { signupFormScheme } from "@/validation/formSchemes";
 import { useRouter } from "next/router";
+import { supabase } from "@/lib/supabaseClient";
 import { pagesPath } from "@/lib/$path";
 
-interface PhoneInput {
+
+interface ISignupInput {
   phoneNumber: string;
+  password: string
 }
 
 const OTPRequest: NextPage = () => {
   const router = useRouter();
+
   const {
     register,
     handleSubmit,
     formState: { isValid, isSubmitting, errors },
-  } = useForm<PhoneInput>({
+  } = useForm<ISignupInput>({
     mode: "onChange",
-    resolver: yupResolver(phoneNumberFormScheme),
+    resolver: yupResolver(signupFormScheme),
   });
 
   /**
    * 電話を送信する
    * @param inputValue フォームで入力した値
    */
-  const submitPhone: SubmitHandler<PhoneInput> = async ({
+  const submitPhone: SubmitHandler<ISignupInput> = async ({
     phoneNumber,
+    password
   }): Promise<void> => {
     try {
-      // TODO ここでAPIを呼び出し
-      console.log(phoneNumber);
+      const phone = `+81${parseInt(phoneNumber, 10)}`;
+      await supabase.auth.signUp({phone, password})
 
       // 入力画面に遷移
       await router.push(pagesPath.otp.$url());
-    } catch (error) {
-      // TODO ここでtoastとか出すか
+    } catch (error: unknown) {
+
+      if (error instanceof Error) {
+        alert(error.message)
+      }
     }
   };
 
@@ -75,6 +83,37 @@ const OTPRequest: NextPage = () => {
                 {errors.phoneNumber.message}
               </p>
             )}
+
+            <label className="form-label mt-2 text-gray-700">
+              パスワード
+            </label>
+            <input
+              {...register("password")}
+              type="password"
+              required
+              className="
+                  form-control
+                  w-full
+                  px-3
+                  py-1.5
+                  text-base
+                  font-normal
+                  text-gray-700
+                  bg-white bg-clip-padding
+                  border border-solid border-gray-300
+                  rounded
+                  transition
+                  ease-in-out
+                  mt-2
+                  focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+            />
+            {errors.password != null && (
+              <p className="mt-2 text-red-600" role="alert">
+                {errors.password.message}
+              </p>
+            )}
+
+
             <button
               disabled={!isValid || isSubmitting}
               className="mt-2 bg-gray-600 hover:bg-gray-500 disabled:bg-gray-500 text-white rounded px-4 py-2"
