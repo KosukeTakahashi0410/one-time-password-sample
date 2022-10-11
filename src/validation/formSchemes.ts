@@ -1,7 +1,7 @@
 import * as yup from "yup";
 import { phoneNumberRegexp, numberRegex } from "./regex";
 
-/** 携帯電話番号フォームバリデーションスキーマ */
+/** サインアップフォームバリデーションスキーマ */
 export const signupFormScheme = yup.object().shape({
   phoneNumber: yup
     .string()
