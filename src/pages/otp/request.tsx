@@ -9,7 +9,6 @@ import { pagesPath } from "@/lib/$path";
 
 interface ISignupInput {
   phoneNumber: string;
-  password: string
 }
 
 const OTPRequest: NextPage = () => {
@@ -30,11 +29,21 @@ const OTPRequest: NextPage = () => {
    */
   const submitPhone: SubmitHandler<ISignupInput> = async ({
     phoneNumber,
-    password
   }): Promise<void> => {
     try {
       const phone = `+81${parseInt(phoneNumber, 10)}`;
-      await supabase.auth.signUp({phone, password})
+
+
+      const { data, error } = await supabase.functions.invoke('send-message', {
+        body: JSON.stringify({ toMobile: phone })
+      })
+
+      if (error !== null) {
+        alert(error)
+      }
+
+      console.log({data})
+
 
       // 入力画面に遷移
       await router.push(pagesPath.otp.$url());
@@ -83,36 +92,6 @@ const OTPRequest: NextPage = () => {
                 {errors.phoneNumber.message}
               </p>
             )}
-
-            <label className="form-label mt-2 text-gray-700">
-              パスワード
-            </label>
-            <input
-              {...register("password")}
-              type="password"
-              required
-              className="
-                  form-control
-                  w-full
-                  px-3
-                  py-1.5
-                  text-base
-                  font-normal
-                  text-gray-700
-                  bg-white bg-clip-padding
-                  border border-solid border-gray-300
-                  rounded
-                  transition
-                  ease-in-out
-                  mt-2
-                  focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-            />
-            {errors.password != null && (
-              <p className="mt-2 text-red-600" role="alert">
-                {errors.password.message}
-              </p>
-            )}
-
 
             <button
               disabled={!isValid || isSubmitting}

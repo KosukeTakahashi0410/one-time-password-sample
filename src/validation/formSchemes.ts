@@ -12,13 +12,6 @@ export const signupFormScheme = yup.object().shape({
     .matches(phoneNumberRegexp, {
       message: "携帯電話番号の形式で入力してください",
     }),
-  password: yup
-    .string()
-    .required("パスワードは必須項目です。")
-    .matches(/(?=.*[a-z])/, "小文字を含めてください。")
-    .matches(/(?=.*[A-Z])/, "大文字を含めてください。")
-    .matches(/(?=.*[0-9])/, "数字を含めてください。")
-    .min(8, "最低８文字含めてください。"),
 });
 
 /** ワンタイムパスワードフォームバリデーションスキーマ */
