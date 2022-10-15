@@ -56,9 +56,20 @@ const OTPRequest: NextPage = () => {
   };
 
   return (
-    <div className="mt-8 pl-4 pr-4">
-      <div className="max-w-screen-md mx-auto">
-        <h1 className="text-lg font-bold">2段階認証を行う</h1>
+    <div className="flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+      <div className="w-full max-w-md space-y-8">
+        <div>
+          <img
+            className="mx-auto h-12 w-auto"
+            src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
+            alt="Your Company"
+          />
+          <h1 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">2段階認証を行う</h1>
+          <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">
+            OTP Sample
+          </h2>
+        </div>
+
         <section>
           <form
             onSubmit={handleSubmit(submitPhone)}
@@ -95,7 +106,7 @@ const OTPRequest: NextPage = () => {
 
             <button
               disabled={!isValid || isSubmitting}
-              className="mt-2 bg-gray-600 hover:bg-gray-500 disabled:bg-gray-500 text-white rounded px-4 py-2"
+              className="mt-2 group relative flex w-full justify-center rounded-md border border-transparent bg-indigo-800 py-2 px-4 text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
             >
               SNSを送信
             </button>
