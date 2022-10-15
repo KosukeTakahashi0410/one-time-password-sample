@@ -6,7 +6,6 @@ import { useRouter } from "next/router";
 import { supabase } from "@/lib/supabaseClient";
 import { pagesPath } from "@/lib/$path";
 
-
 interface ISignupInput {
   phoneNumber: string;
 }
@@ -33,24 +32,21 @@ const OTPRequest: NextPage = () => {
     try {
       const phone = `+81${parseInt(phoneNumber, 10)}`;
 
-
-      const { data, error } = await supabase.functions.invoke('send-message', {
-        body: JSON.stringify({ toMobile: phone })
-      })
+      const { data, error } = await supabase.functions.invoke("send-message", {
+        body: JSON.stringify({ toMobile: phone }),
+      });
 
       if (error !== null) {
-        alert(error)
+        alert(error);
       }
 
-      console.log({data})
-
+      console.log({ data });
 
       // 入力画面に遷移
       await router.push(pagesPath.otp.$url());
     } catch (error: unknown) {
-
       if (error instanceof Error) {
-        alert(error.message)
+        alert(error.message);
       }
     }
   };
@@ -64,7 +60,9 @@ const OTPRequest: NextPage = () => {
             src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
             alt="Your Company"
           />
-          <h1 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">2段階認証を行う</h1>
+          <h1 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">
+            2段階認証を行う
+          </h1>
           <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">
             OTP Sample
           </h2>
@@ -108,7 +106,7 @@ const OTPRequest: NextPage = () => {
               disabled={!isValid || isSubmitting}
               className="mt-2 group relative flex w-full justify-center rounded-md border border-transparent bg-indigo-800 py-2 px-4 text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
             >
-              SNSを送信
+              SMSを送信
             </button>
           </form>
         </section>
